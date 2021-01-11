@@ -6,8 +6,8 @@ const Handler = NextConnect<NextApiRequest, NextApiResponse>()
 import Project from '../../models/projects'
 import connectDB from '../../config/db'
 
+connectDB()
 export default Handler.get(async (req, res) => {
-  await connectDB()
   const projects = await Project.find({})
   if (projects) {
     res.json(projects)

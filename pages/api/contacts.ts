@@ -20,8 +20,8 @@ const updateEmailCount = async () => {
 }
 const Handler = NextConnect<NextApiRequest, NextApiResponse>()
 
+connectDB()
 export default Handler.post(async (req, res) => {
-  await connectDB()
   const { name, email, message, subject } = req.body
 
   const ttl = 3600000
