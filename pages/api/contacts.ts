@@ -20,10 +20,8 @@ const updateEmailCount = async () => {
 }
 const Handler = NextConnect<NextApiRequest, NextApiResponse>()
 
-connectDB()
 export default Handler.post(async (req, res) => {
   const { name, email, message, subject } = req.body
-
   const ttl = 3600000
 
   const transport = {
@@ -64,52 +62,58 @@ export default Handler.post(async (req, res) => {
   }
 
   const now = new Date()
-  let user: Props['user'] = await User.findOne({ email })
 
-  if (user) {
-    if (user.time < now.getTime()) {
-      user.name = name
-      user.email = email
-      user.message = message
-      user.time = now.getTime() + ttl
+  try {
+    await connectDB
+    let user: Props['user'] = await User.findOne({ email })
 
-      const updated = await user.save()
-      transporter.sendMail(mail, (err, data) => {
-        if (err) {
-          res.json({
-            status: 'fail',
-            valid: false,
-            data: updated,
-          })
-        } else {
-          res.json({ status: 'success', valid: true, data: updated })
-        }
-      })
-      updateEmailCount()
+    if (user) {
+      if (user.time < now.getTime()) {
+        user.name = name
+        user.email = email
+        user.message = message
+        user.time = now.getTime() + ttl
+
+        const updated = await user.save()
+        transporter.sendMail(mail, (err, data) => {
+          if (err) {
+            res.json({
+              status: 'fail',
+              valid: false,
+              data: updated,
+            })
+          } else {
+            res.json({ status: 'success', valid: true, data: updated })
+          }
+        })
+        updateEmailCount()
+      } else {
+        res.json({ valid: false, data: user })
+      }
     } else {
-      res.json({ valid: false, data: user })
-    }
-  } else {
-    const createdUser = await User.create({
-      name: name,
-      email: email,
-      message: message,
-      time: now.getTime() + ttl,
-    })
-
-    if (createdUser) {
-      transporter.sendMail(mail, (err, data) => {
-        if (err) {
-          res.json({
-            status: 'fail',
-            valid: false,
-            data: createdUser,
-          })
-        } else {
-          res.json({ status: 'success', valid: true, data: createdUser })
-        }
+      const createdUser = await User.create({
+        name: name,
+        email: email,
+        message: message,
+        time: now.getTime() + ttl,
       })
-      updateEmailCount()
+
+      if (createdUser) {
+        transporter.sendMail(mail, (err, data) => {
+          if (err) {
+            res.json({
+              status: 'fail',
+              valid: false,
+              data: createdUser,
+            })
+          } else {
+            res.json({ status: 'success', valid: true, data: createdUser })
+          }
+        })
+        updateEmailCount()
+      }
     }
+  } catch (error) {
+    console.log(error)
   }
 })
