@@ -7,7 +7,7 @@ import Menu from '../navitems/SpeedDial'
 
 const Layout = ({ children }) => {
   return (
-    <>
+    <div style={{ maxWidth: '100vw', overflow: 'hidden' }}>
       <Head>
         <link
           rel='preload'
@@ -21,7 +21,7 @@ const Layout = ({ children }) => {
         {children}
         <Footer />
       </Provider>
-    </>
+    </div>
   )
 }
 
