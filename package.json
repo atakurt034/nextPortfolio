@@ -26,6 +26,7 @@
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8",
     "redux-thunk": "^2.3.0",
+    "saslprep": "^1.0.3",
     "typewriter-effect": "^2.17.0"
   },
   "devDependencies": {
