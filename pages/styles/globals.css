@@ -1,0 +1,53 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+
+/* Typewriter */
+.string {
+  color: #000;
+  font-family: 'My-typewriter';
+  font-size: 2rem;
+}
+
+.name {
+  color: blue;
+  font-weight: 600;
+  font-family: 'My-typewriter';
+}
+
+.red {
+  color: red
+}
+
+.blue {
+  color: blue
+}
+
+.cursor {
+  font-size: 2rem;
+}
+
+@font-face {
+  font-family: "My-typewriter";
+  src: url("/fonts/Kingthings_Trypewriter_2.ttf");
+}
+
+/* About */
+#page {
+  height: 100vh;
+  margin-top: 50px;
+}
