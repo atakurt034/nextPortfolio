@@ -3,7 +3,7 @@ import NextConnect from 'next-connect'
 
 const Handler = NextConnect<NextApiRequest, NextApiResponse>()
 import Project from '../../models/projects'
-import connectDB from '../../config/db'
+import connectDB from './config/db'
 
 export default Handler.get(async (req, res) => {
   try {

@@ -7,7 +7,7 @@ import dotenv from 'dotenv'
 import Server from '../../models/server'
 import User from '../../models/user'
 
-import connectDB from '../../config/db'
+import connectDB from './config/db'
 
 dotenv.config()
 
