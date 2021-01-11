@@ -7,6 +7,8 @@ import { ProjectList, ProjectListProps } from '../../constants/projectConstants'
 import GitHubIcon from '@material-ui/icons/GitHub'
 import FavoriteIcon from '@material-ui/icons/Favorite'
 
+import Image from 'next/image'
+
 import {
   Tooltip,
   Button,
@@ -28,7 +30,7 @@ import Message from '../../components/Message'
 
 import { Bounce, Zoom } from 'react-reveal'
 
-const Project: React.FC = () => {
+const Project = () => {
   const classes = useStyles()
   const dispatch = useDispatch()
 
@@ -103,7 +105,13 @@ const Project: React.FC = () => {
                           <CardActionArea
                             onClick={() => clickHandler(project.url)}
                           >
-                            <CardMedia image={project.image} component='img' />
+                            {/* <CardMedia image={project.image} component='img' /> */}
+                            <Image
+                              src={project.image}
+                              alt={project.name}
+                              height={300}
+                              width={400}
+                            />
                             <CardContent className={classes.description}>
                               <Typography variant='h5' className={classes.name}>
                                 {project.name}

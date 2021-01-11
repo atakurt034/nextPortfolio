@@ -3,6 +3,7 @@ import { CardMedia, Grid, Container } from '@material-ui/core'
 import TypeWords from './typewriter/Typewriter'
 import clsx from 'clsx'
 import { useStyles } from './aStyle'
+import Image from 'next/image'
 
 import { Fade } from 'react-reveal'
 
@@ -22,10 +23,12 @@ const About: React.FC = () => {
           <Grid container>
             <Grid item xs={12} sm={6} className={classes.imagewrapper}>
               <Fade in={load}>
-                <CardMedia
-                  className={clsx(classes.image, 'image')}
-                  image={img}
-                  component='img'
+                <Image
+                  src={img}
+                  alt='Picture of the author'
+                  className={classes.image}
+                  height={400}
+                  width={400}
                 />
               </Fade>
             </Grid>

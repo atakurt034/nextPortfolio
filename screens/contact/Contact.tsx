@@ -35,8 +35,8 @@ const Contact = () => {
     let duration = 2
     let length = 800
     const smoothScroll = () => {
-      duration += 2.5
-      window.scrollBy(0, 2)
+      duration += 3.5
+      window.scrollBy(0, 5)
       if (length > duration) {
         setTimeout(() => {
           smoothScroll()

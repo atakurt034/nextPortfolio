@@ -8,16 +8,20 @@ interface TypeWriterProps {
   image: (image: string) => void
 }
 
+const image1 = '/images/profile2.jpg'
+const image2 = '/images/profile3.jpg'
+const image3 = '/images/profile.jpg'
+
 const TypeWords: React.FC<TypeWriterProps> = ({ exit, enter, image }) => {
   const [change, setChange] = useState(0)
 
   useEffect(() => {
     if (change === 1) {
-      image('/images/profile2.jpg')
+      image(image1)
     } else if (change === 2) {
-      image('/images/profile3.jpg')
+      image(image2)
     } else {
-      image('/images/profile.jpg')
+      image(image3)
     }
   }, [change, image])
 
