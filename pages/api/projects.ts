@@ -1,9 +1,12 @@
 import { NextApiRequest, NextApiResponse } from 'next'
+import NextConnect from 'next-connect'
 
-import Project from './models/projects'
-import connectDB from './config/db'
+const Handler = NextConnect<NextApiRequest, NextApiResponse>()
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+import Project from '../../models/projects'
+import connectDB from '../../config/db'
+
+export default Handler.get(async (req, res) => {
   await connectDB()
   const projects = await Project.find({})
   if (projects) {
@@ -12,4 +15,4 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     res.status(404)
     throw new Error('Projects not found')
   }
-}
+})
