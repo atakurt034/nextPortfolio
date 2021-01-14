@@ -63,20 +63,23 @@ const ContactStore = () => {
 
   const sendMail = async (name, email, subject, message) => {
     const mail = { name, email, subject, message }
+
     try {
       dispatch({ type: CONTACT_SEND_MAIL_REQUEST })
+      const url = 'https://server0342021.herokuapp.com/api/contacts'
 
-      const config = {
+      const data = await fetch(url, {
+        method: 'POST', // *GET, POST, PUT, DELETE, etc.
+        cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: 'same-origin', // include, *same-origin, omit
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
+          'Content-Type': 'application/json',
+          // 'Content-Type': 'application/x-www-form-urlencoded',
         },
-      }
-
-      const { data } = await axios.post(
-        'https://server0342021.herokuapp.com/api/contacts',
-        mail,
-        config
-      )
+        redirect: 'follow', // manual, *follow, error
+        referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+        body: JSON.stringify(mail), // body data type must match "Content-Type" header
+      })
       dispatch({
         type: CONTACT_SEND_MAIL_SUCCESS,
         payload: { status: data.status },
