@@ -10,6 +10,7 @@ import User from '../../models/user'
 import connectDB from './config/db'
 
 dotenv.config()
+connectDB
 
 const updateEmailCount = async () => {
   await Server.findByIdAndUpdate(
@@ -64,31 +65,26 @@ export default Handler.post(async (req, res) => {
   const now = new Date()
 
   try {
-    connectDB
     let user: Props['user'] = await User.findOne({ email })
-
     if (user) {
       if (user.time < now.getTime()) {
         user.name = name
         user.email = email
         user.message = message
         user.time = now.getTime() + ttl
-
-        const updated = await user.save()
+        user.save()
         transporter.sendMail(mail, (err, data) => {
           if (err) {
             res.json({
               status: 'fail',
-              valid: false,
-              data: updated,
             })
           } else {
-            res.json({ status: 'success', valid: true, data: updated })
+            res.json({ status: 'success' })
           }
         })
         updateEmailCount()
       } else {
-        res.json({ valid: false, data: user })
+        res.json({ status: 'fail' })
       }
     } else {
       const createdUser = await User.create({
@@ -103,11 +99,9 @@ export default Handler.post(async (req, res) => {
           if (err) {
             res.json({
               status: 'fail',
-              valid: false,
-              data: createdUser,
             })
           } else {
-            res.json({ status: 'success', valid: true, data: createdUser })
+            res.json({ status: 'success' })
           }
         })
         updateEmailCount()

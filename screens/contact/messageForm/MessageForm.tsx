@@ -27,9 +27,9 @@ const MessageForm: React.FC = () => {
 
   const [open, setOpen] = useState<boolean>(false)
 
-  const contactSendMail = useSelector<SendMail>(
-    (state) => state.contactSendMail
-  )
+  // const contactSendMail = useSelector<SendMail>(
+  //   (state) => state.contactSendMail
+  // )
   // const { loading, success } = contactSendMail as SendMailProps
   const { loading, success, successHandler, sendMail } = useContact()
 
@@ -39,7 +39,7 @@ const MessageForm: React.FC = () => {
     subject: string
     message: string
   }) => {
-    const { name, email, subject, message } = data
+    // const { name, email, subject, message } = data
     // dispatch(
     //   sendMail({
     //     name,

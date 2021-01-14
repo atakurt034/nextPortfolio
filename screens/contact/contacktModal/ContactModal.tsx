@@ -36,15 +36,15 @@ export const ContactModal: React.FC<Props> = ({ open, handleClose }) => {
 
   // const contactSendMail = useSelector<SendMail>((state) => state.contactSendMail)
   // const { data, loading, error, status } = contactSendMail as SendMailProps
-  const { data, loading, error, status } = useContact()
+  const { loading, error, status } = useContact()
 
   useEffect(() => {
-    if (data) {
+    if (!loading && !error) {
       if (status === 'success') {
         setValid(true)
       }
     }
-  }, [data, loading, error, status])
+  }, [loading, error, status])
 
   return (
     <div>

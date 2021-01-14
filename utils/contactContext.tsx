@@ -8,7 +8,6 @@ import {
 } from '../constants/contactConstants'
 
 const ContactContext = createContext({
-  data: [],
   loading: false,
   success: false,
   error: '',
@@ -33,7 +32,6 @@ const contactReducer = (state, action) => {
         loading: false,
         success: true,
         status: action.payload.status,
-        data: action.payload.data,
       }
     case CONTACT_SEND_MAIL_FAIL:
       return { loading: false, error: action.payload }
@@ -49,7 +47,6 @@ const initialState = {
   success: false,
   status: '',
   error: '',
-  data: [{}],
 }
 
 export const useContact = () => useContext(ContactContext)
@@ -77,7 +74,7 @@ const ContactStore = () => {
       const { data } = await axios.post('/api/contacts', mail, config)
       dispatch({
         type: CONTACT_SEND_MAIL_SUCCESS,
-        payload: { status: data.status, data: data.data },
+        payload: { status: data.status },
       })
     } catch (error) {
       console.log(error)
@@ -91,5 +88,5 @@ const ContactStore = () => {
     }
   }
 
-  return { loading, success, status, error, data, successHandler, sendMail }
+  return { loading, success, status, error, successHandler, sendMail }
 }
