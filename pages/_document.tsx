@@ -4,7 +4,14 @@ export default class CustomDocument extends Document {
   render() {
     return (
       <Html>
-        <Head></Head>
+        <Head>
+          <link
+            rel='preload'
+            href='/fonts/Kingthings_Trypewriter_2.ttf'
+            as='font'
+            crossOrigin=''
+          />
+        </Head>
 
         <body>
           <Main />

@@ -1,8 +1,4 @@
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { listProjects } from '../../actions/projectActions'
-
-import { ProjectList, ProjectListProps } from '../../constants/projectConstants'
+import React from 'react'
 
 import GitHubIcon from '@material-ui/icons/GitHub'
 import FavoriteIcon from '@material-ui/icons/Favorite'
@@ -16,7 +12,6 @@ import {
   CardActionArea,
   CardActions,
   CardContent,
-  CardMedia,
   Container,
   Grid,
   Paper,
@@ -25,17 +20,11 @@ import {
 import { useStyles } from './pStyle'
 
 import DiverText from '../../components/DividerWithText'
-import Loader from '../../components/Loader'
-import Message from '../../components/Message'
 
 import { Bounce, Zoom } from 'react-reveal'
 
-const Project = () => {
+const Project = ({ projects }) => {
   const classes = useStyles()
-  const dispatch = useDispatch()
-
-  const projectList = useSelector<ProjectList>((state) => state.projectList)
-  const { loading, error, projects } = projectList as ProjectListProps
 
   const clickHandler = (url: string) => {
     window.open(url, '_blank')
@@ -43,10 +32,6 @@ const Project = () => {
   const gitHandler = (url: string) => {
     window.open(url, '_blank')
   }
-
-  useEffect(() => {
-    dispatch(listProjects())
-  }, [dispatch])
 
   return (
     <Paper id='project' className={classes.paper}>
@@ -82,64 +67,57 @@ const Project = () => {
           </Bounce>
         </Grid>
         <Grid container spacing={2}>
-          {loading ? (
-            <Loader />
-          ) : error ? (
-            <Message variant='error'>{error}</Message>
-          ) : (
-            projects.map((project, index) => (
-              <React.Fragment key={index}>
-                <Grid item xs={12} sm={6} lg={4}>
-                  <Tooltip
-                    placement='top'
-                    arrow={true}
-                    title='Click Image to go to the site'
-                  >
-                    <div>
-                      <Zoom cascade delay={index * 200}>
-                        <Card
-                          elevation={12}
-                          style={{ borderRadius: 10 }}
-                          className={classes.root}
+          {projects.map((project, index) => (
+            <React.Fragment key={index}>
+              <Grid item xs={12} sm={6} lg={4}>
+                <Tooltip
+                  placement='top'
+                  arrow={true}
+                  title='Click Image to go to the site'
+                >
+                  <div>
+                    <Zoom cascade delay={index * 100}>
+                      <Card
+                        elevation={12}
+                        style={{ borderRadius: 10 }}
+                        className={classes.root}
+                      >
+                        <CardActionArea
+                          onClick={() => clickHandler(project.url)}
                         >
-                          <CardActionArea
-                            onClick={() => clickHandler(project.url)}
+                          <Image
+                            src={project.image}
+                            alt={project.name}
+                            height={300}
+                            width={400}
+                          />
+                          <CardContent className={classes.description}>
+                            <Typography variant='h5' className={classes.name}>
+                              {project.name}
+                            </Typography>
+                            <Typography variant='body1'>
+                              {project.description}
+                            </Typography>
+                          </CardContent>
+                        </CardActionArea>
+                        <CardActions>
+                          <Button
+                            style={{ margin: 'auto' }}
+                            variant='contained'
+                            size='small'
+                            startIcon={<GitHubIcon />}
+                            onClick={() => gitHandler(project.github)}
                           >
-                            {/* <CardMedia image={project.image} component='img' /> */}
-                            <Image
-                              src={project.image}
-                              alt={project.name}
-                              height={300}
-                              width={400}
-                            />
-                            <CardContent className={classes.description}>
-                              <Typography variant='h5' className={classes.name}>
-                                {project.name}
-                              </Typography>
-                              <Typography variant='body1'>
-                                {project.description}
-                              </Typography>
-                            </CardContent>
-                          </CardActionArea>
-                          <CardActions>
-                            <Button
-                              style={{ margin: 'auto' }}
-                              variant='contained'
-                              size='small'
-                              startIcon={<GitHubIcon />}
-                              onClick={() => gitHandler(project.github)}
-                            >
-                              Repository
-                            </Button>
-                          </CardActions>
-                        </Card>
-                      </Zoom>
-                    </div>
-                  </Tooltip>
-                </Grid>
-              </React.Fragment>
-            ))
-          )}
+                            Repository
+                          </Button>
+                        </CardActions>
+                      </Card>
+                    </Zoom>
+                  </div>
+                </Tooltip>
+              </Grid>
+            </React.Fragment>
+          ))}
         </Grid>
       </Container>
     </Paper>

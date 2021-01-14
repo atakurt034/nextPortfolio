@@ -29,14 +29,6 @@ const TypeWords: React.FC<TypeWriterProps> = ({ exit, enter, image }) => {
 
   return (
     <>
-      <Head>
-        <link
-          rel='preload'
-          href='/fonts//fonts/Kingthings_Trypewriter_2.ttf'
-          as='font'
-          crossOrigin=''
-        />
-      </Head>
       <Typewriter
         options={{ loop: true, cursorClassName: 'cursor' }}
         onInit={(typewriter) => {
