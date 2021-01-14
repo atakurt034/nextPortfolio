@@ -64,7 +64,7 @@ export default Handler.post(async (req, res) => {
   const now = new Date()
 
   try {
-    await connectDB
+    connectDB
     let user: Props['user'] = await User.findOne({ email })
 
     if (user) {

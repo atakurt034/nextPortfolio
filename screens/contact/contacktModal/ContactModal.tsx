@@ -1,9 +1,9 @@
-import React, {  useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Modal from '@material-ui/core/Modal'
 import Backdrop from '@material-ui/core/Backdrop'
 import { Box, Button, Container, Paper, Typography } from '@material-ui/core'
 
-import {useStyles} from './cStyle';
+import { useStyles } from './cStyle'
 
 import CheckCircleIcon from '@material-ui/icons/CheckCircle'
 import ErrorIcon from '@material-ui/icons/Error'
@@ -14,7 +14,7 @@ import { useSelector } from 'react-redux'
 import RubberBand from 'react-reveal/RubberBand'
 
 interface Props {
-  open: boolean,
+  open: boolean
   handleClose: any
 }
 
@@ -22,19 +22,21 @@ interface SendMail {
   contactSendMail: {}[]
 }
 interface SendMailProps {
-  data: {}[],
-  loading: boolean,
-  error: {}[],
+  data: {}[]
+  loading: boolean
+  error: {}[]
   status: string
 }
 
+import { useContact } from '../../../utils/contactContext'
 
-export const ContactModal:React.FC<Props> = ({ open, handleClose }) => {
+export const ContactModal: React.FC<Props> = ({ open, handleClose }) => {
   const classes = useStyles()
   const [valid, setValid] = useState(false)
 
-  const contactSendMail = useSelector<SendMail>((state) => state.contactSendMail)
-  const { data, loading, error, status } = contactSendMail as SendMailProps
+  // const contactSendMail = useSelector<SendMail>((state) => state.contactSendMail)
+  // const { data, loading, error, status } = contactSendMail as SendMailProps
+  const { data, loading, error, status } = useContact()
 
   useEffect(() => {
     if (data) {

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Button, Container, TextField, Paper } from '@material-ui/core'
 
 import SendIcon from '@material-ui/icons/Send'
-import { sendMail } from '../../../actions/contactActions'
+// import { sendMail } from '../../../actions/contactActions'
 import { CONTACT_SEND_MAIL_RESET } from '../../../constants/contactConstants'
 
 import { useDispatch, useSelector } from 'react-redux'
@@ -18,6 +18,8 @@ import { SendMail, SendMailProps } from './mfInterface'
 
 import { useForm } from 'react-hook-form'
 
+import { useContact } from '../../../utils/contactContext'
+
 const MessageForm: React.FC = () => {
   const { register, handleSubmit, errors, clearErrors } = useForm()
   const classes = useStyles()
@@ -28,7 +30,8 @@ const MessageForm: React.FC = () => {
   const contactSendMail = useSelector<SendMail>(
     (state) => state.contactSendMail
   )
-  const { loading, success } = contactSendMail as SendMailProps
+  // const { loading, success } = contactSendMail as SendMailProps
+  const { loading, success, successHandler, sendMail } = useContact()
 
   const submitHandler = (data: {
     name: string
@@ -37,20 +40,21 @@ const MessageForm: React.FC = () => {
     message: string
   }) => {
     const { name, email, subject, message } = data
-    console.log(data)
-    dispatch(
-      sendMail({
-        name,
-        email,
-        subject,
-        message,
-      })
-    )
+    // dispatch(
+    //   sendMail({
+    //     name,
+    //     email,
+    //     subject,
+    //     message,
+    //   })
+    // )
+    sendMail(data)
   }
 
   const closeHandler = () => {
     setOpen(false)
-    dispatch({ type: CONTACT_SEND_MAIL_RESET })
+    // dispatch({ type: CONTACT_SEND_MAIL_RESET })
+    successHandler('success')
   }
 
   useEffect(() => {

@@ -6,6 +6,8 @@ import Contact from '../screens/contact/Contact'
 import { GetStaticProps } from 'next'
 import { getProject } from './api/projects'
 
+import { ContactProvider } from '../utils/contactContext'
+
 export const getStaticProps: GetStaticProps = async (context) => {
   const projects = await getProject()
   return { props: { projects } }
@@ -19,7 +21,9 @@ export default function Home(
       <About />
       <Stacks />
       <Project {...props} />
-      <Contact />
+      <ContactProvider>
+        <Contact />
+      </ContactProvider>
     </Layout>
   )
 }

@@ -2,17 +2,6 @@ import mongoose from 'mongoose'
 import dotenv from 'dotenv'
 
 dotenv.config()
-let saslprep
-try {
-  saslprep = require('saslprep')
-} catch (e) {
-  // don't do anything;
-}
-if (!saslprep) {
-  console.warn(
-    'Warning: no saslprep library specified. Passwords will not be sanitized'
-  )
-}
 
 const connectDB = async () => {
   try {
