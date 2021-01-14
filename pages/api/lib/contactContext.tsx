@@ -62,18 +62,19 @@ const ContactStore = () => {
   }
 
   const sendMail = async (name, email, subject, message) => {
+    const mail = { name, email, subject, message }
     try {
       dispatch({ type: CONTACT_SEND_MAIL_REQUEST })
 
       const config = {
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/x-www-form-urlencoded',
         },
       }
 
       const { data } = await axios.post(
         'https://server0342021.herokuapp.com/api/contacts',
-        { name, email, subject, message },
+        mail,
         config
       )
       dispatch({
