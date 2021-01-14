@@ -8,8 +8,6 @@ import { useStyles } from './cStyle'
 import CheckCircleIcon from '@material-ui/icons/CheckCircle'
 import ErrorIcon from '@material-ui/icons/Error'
 
-import { useSelector } from 'react-redux'
-
 /// <reference path=./global.d.ts />
 import RubberBand from 'react-reveal/RubberBand'
 
@@ -28,14 +26,12 @@ interface SendMailProps {
   status: string
 }
 
-import { useContact } from '../../../utils/contactContext'
+import { useContact } from '../../../pages/api/lib/contactContext'
 
 export const ContactModal: React.FC<Props> = ({ open, handleClose }) => {
   const classes = useStyles()
   const [valid, setValid] = useState(false)
 
-  // const contactSendMail = useSelector<SendMail>((state) => state.contactSendMail)
-  // const { data, loading, error, status } = contactSendMail as SendMailProps
   const { loading, error, status } = useContact()
 
   useEffect(() => {

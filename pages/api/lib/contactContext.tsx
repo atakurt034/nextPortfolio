@@ -5,14 +5,14 @@ import {
   CONTACT_SEND_MAIL_REQUEST,
   CONTACT_SEND_MAIL_RESET,
   CONTACT_SEND_MAIL_SUCCESS,
-} from '../constants/contactConstants'
+} from '../../../constants/contactConstants'
 
 const ContactContext = createContext({
   loading: false,
   success: false,
   error: '',
   status: '',
-  sendMail: (mail: any) => {},
+  sendMail: (name, email, subject, message) => {},
   successHandler: (text: any) => {},
 })
 
@@ -61,7 +61,7 @@ const ContactStore = () => {
     }
   }
 
-  const sendMail = async (mail) => {
+  const sendMail = async (name, email, subject, message) => {
     try {
       dispatch({ type: CONTACT_SEND_MAIL_REQUEST })
 
@@ -71,7 +71,11 @@ const ContactStore = () => {
         },
       }
 
-      const { data } = await axios.post('/api/contacts', mail, config)
+      const { data } = await axios.post(
+        '/api/contacts',
+        { name, email, subject, message },
+        config
+      )
       dispatch({
         type: CONTACT_SEND_MAIL_SUCCESS,
         payload: { status: data.status },

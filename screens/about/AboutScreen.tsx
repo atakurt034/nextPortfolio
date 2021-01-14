@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
-import { CardMedia, Grid, Container } from '@material-ui/core'
+import { Grid, Container } from '@material-ui/core'
 import TypeWords from './typewriter/Typewriter'
-import clsx from 'clsx'
 import { useStyles } from './aStyle'
 import Image from 'next/image'
 

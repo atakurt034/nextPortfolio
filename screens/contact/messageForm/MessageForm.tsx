@@ -2,10 +2,6 @@ import React, { useState, useEffect } from 'react'
 import { Button, Container, TextField, Paper } from '@material-ui/core'
 
 import SendIcon from '@material-ui/icons/Send'
-// import { sendMail } from '../../../actions/contactActions'
-import { CONTACT_SEND_MAIL_RESET } from '../../../constants/contactConstants'
-
-import { useDispatch, useSelector } from 'react-redux'
 
 import { ModalLoader } from '../../../components/ModalLoader'
 import Message from '../../../components/Message'
@@ -13,47 +9,27 @@ import { ContactModal } from '../contacktModal/ContactModal'
 import { Fade } from 'react-reveal'
 
 import { useStyles } from './mfStyle'
-import { emailKeywords, messageKeywords, nameKeywords } from './mfData'
-import { SendMail, SendMailProps } from './mfInterface'
 
 import { useForm } from 'react-hook-form'
 
-import { useContact } from '../../../utils/contactContext'
+import { useContact } from '../../../pages/api/lib/contactContext'
 
 const MessageForm: React.FC = () => {
   const { register, handleSubmit, errors, clearErrors } = useForm()
   const classes = useStyles()
-  const dispatch = useDispatch()
 
   const [open, setOpen] = useState<boolean>(false)
 
-  // const contactSendMail = useSelector<SendMail>(
-  //   (state) => state.contactSendMail
-  // )
-  // const { loading, success } = contactSendMail as SendMailProps
   const { loading, success, successHandler, sendMail } = useContact()
 
-  const submitHandler = (data: {
-    name: string
-    email: string
-    subject: string
-    message: string
-  }) => {
-    // const { name, email, subject, message } = data
-    // dispatch(
-    //   sendMail({
-    //     name,
-    //     email,
-    //     subject,
-    //     message,
-    //   })
-    // )
-    sendMail(data)
+  const submitHandler = (data) => {
+    const { name, email, subject, message } = data
+
+    sendMail(name, email, subject, message)
   }
 
   const closeHandler = () => {
     setOpen(false)
-    // dispatch({ type: CONTACT_SEND_MAIL_RESET })
     successHandler('success')
   }
 
