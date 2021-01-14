@@ -72,7 +72,7 @@ const ContactStore = () => {
       }
 
       const { data } = await axios.post(
-        '/api/contacts',
+        'https://server0342021.herokuapp.com/api/contacts',
         { name, email, subject, message },
         config
       )
