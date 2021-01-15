@@ -72,7 +72,7 @@ const ContactStore = () => {
       }
 
       const { data } = await axios.post(
-        'https://cors-anywhere.herokuapp.com/https://server0342021.herokuapp.com/api/contacts',
+        'https://server0342021.herokuapp.com/api/contacts',
         { name, email, subject, message },
         config
       )

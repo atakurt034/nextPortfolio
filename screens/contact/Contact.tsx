@@ -48,6 +48,8 @@ const Contact = () => {
     }
   }, [open])
 
+  const MForm = <MessageForm />
+
   return (
     <Paper id='contact' className={classes.paperWrapper}>
       <Typography component='div' variant='h5' className={classes.mainTitle}>
@@ -145,7 +147,7 @@ const Contact = () => {
             justify='center'
             className={classes.messengerContainer}
           >
-            <MessageForm />
+            {MForm}
           </Grid>
         )}
       </Grid>

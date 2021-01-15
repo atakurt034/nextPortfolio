@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { Button, Container, TextField, Paper } from '@material-ui/core'
 
+import dotenv from 'dotenv'
+dotenv.config()
+const { GMAIL_USER } = process.env
+
 import SendIcon from '@material-ui/icons/Send'
 
 import { ModalLoader } from '../../../components/ModalLoader'
@@ -53,7 +57,7 @@ const MessageForm: React.FC = () => {
             <Container component='main' maxWidth='xs'>
               <form
                 onSubmit={handleSubmit(submitHandler)}
-                action='mailto:atakurt034@gmail.com'
+                action={GMAIL_USER}
                 method='POST'
                 encType='multipart/form-data'
               >
