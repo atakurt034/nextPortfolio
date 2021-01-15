@@ -13,12 +13,9 @@
     "@material-ui/lab": "^4.0.0-alpha.57",
     "@material-ui/styles": "^4.11.2",
     "axios": "^0.21.1",
-    "critters": "0.0.6",
     "dotenv": "^8.2.0",
-    "jimp": "^0.16.1",
     "mongoose": "^5.11.11",
     "next": "10.0.5",
-    "next-connect": "^0.9.1",
     "nodemailer": "^6.4.17",
     "react": "17.0.1",
     "react-dom": "17.0.1",
@@ -28,7 +25,6 @@
     "typewriter-effect": "^2.17.0"
   },
   "devDependencies": {
-    "@netlify/plugin-nextjs": "^1.0.5",
     "@types/dotenv": "^8.2.0",
     "@types/express": "^4.17.9",
     "@types/mongoose": "^5.10.3",

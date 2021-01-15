@@ -1,7 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 
-import NextConnect from 'next-connect'
-
 import nodemailer from 'nodemailer'
 import dotenv from 'dotenv'
 import Server from '../../models/server'
@@ -19,9 +17,9 @@ const updateEmailCount = async () => {
     { new: true }
   )
 }
-const Handler = NextConnect<NextApiRequest, NextApiResponse>()
+// const Handler = NextConnect<NextApiRequest, NextApiResponse>()
 
-export default Handler.post(async (req, res) => {
+const Handler = async (req, res) => {
   const { name, email, message, subject } = req.body
   const ttl = 3600000
 
@@ -110,4 +108,6 @@ export default Handler.post(async (req, res) => {
   } catch (error) {
     console.log(error)
   }
-})
+}
+
+export default Handler
