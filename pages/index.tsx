@@ -9,9 +9,6 @@ import { GetStaticProps } from 'next'
 import { getProject } from './api/projects'
 
 import { ContactProvider } from './api/lib/contactContext'
-import { ModalLoader } from '../components/ModalLoader'
-
-import { useRouter } from 'next/router'
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const projects = await getProject()
@@ -23,22 +20,16 @@ interface Props {
 }
 
 const Home: React.FC<Props> = (props) => {
-  const router = useRouter()
-
   return (
     <>
-      {router.isFallback ? (
-        <ModalLoader />
-      ) : (
-        <Layout>
-          <About />
-          <Stacks />
-          <Project {...props} />
-          <ContactProvider>
-            <Contact />
-          </ContactProvider>
-        </Layout>
-      )}
+      <Layout>
+        <About />
+        <Stacks />
+        <Project {...props} />
+        <ContactProvider>
+          <Contact />
+        </ContactProvider>
+      </Layout>
     </>
   )
 }
