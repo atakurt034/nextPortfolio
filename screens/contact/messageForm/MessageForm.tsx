@@ -133,8 +133,7 @@ const MessageForm: React.FC = () => {
                 />
                 {errors.message && (
                   <Message variant='error'>
-                    Don't be shy. Please message me with atleast 5 characters
-                    letters.
+                    Don't be shy. Please message me with atleast 5 characters.
                   </Message>
                 )}
                 <Button
