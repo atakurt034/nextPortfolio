@@ -26,7 +26,7 @@ interface SendMailProps {
   status: string
 }
 
-import { useContact } from '../../../pages/api/lib/contactContext'
+import { useContact } from '@/lib/contactContext'
 
 export const ContactModal: React.FC<Props> = ({ open, handleClose }) => {
   const classes = useStyles()

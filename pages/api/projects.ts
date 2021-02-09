@@ -1,5 +1,5 @@
-import Project from '../../models/projects'
-import connectDB from './config/db'
+import Project from '@/models/projects'
+import connectDB from '@/config/db'
 
 export const getProject = async () => {
   try {

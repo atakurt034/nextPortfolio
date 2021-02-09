@@ -7,8 +7,8 @@ const { GMAIL_USER } = process.env
 
 import SendIcon from '@material-ui/icons/Send'
 
-import { ModalLoader } from '../../../components/ModalLoader'
-import Message from '../../../components/Message'
+import { ModalLoader } from '@/components/ModalLoader'
+import Message from '@/components/Message'
 import { ContactModal } from '../contacktModal/ContactModal'
 import { Fade } from 'react-reveal'
 
@@ -16,7 +16,7 @@ import { useStyles } from './mfStyle'
 
 import { useForm } from 'react-hook-form'
 
-import { useContact } from '../../../pages/api/lib/contactContext'
+import { useContact } from '@/lib/contactContext'
 
 const MessageForm: React.FC = () => {
   const { register, handleSubmit, errors, clearErrors } = useForm()

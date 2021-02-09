@@ -5,7 +5,7 @@ import {
   CONTACT_SEND_MAIL_REQUEST,
   CONTACT_SEND_MAIL_RESET,
   CONTACT_SEND_MAIL_SUCCESS,
-} from '../../../constants/contactConstants'
+} from '../constants/contactConstants'
 
 const ContactContext = createContext({
   loading: false,
@@ -72,7 +72,7 @@ const ContactStore = () => {
       }
 
       const { data } = await axios.post(
-        'https://server0342021.herokuapp.com/api/contacts',
+        '/api/contacts',
         { name, email, subject, message },
         config
       )

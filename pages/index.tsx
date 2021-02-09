@@ -8,7 +8,7 @@ import Contact from '../screens/contact/Contact'
 import { GetStaticProps } from 'next'
 import { getProject } from './api/projects'
 
-import { ContactProvider } from './api/lib/contactContext'
+import { ContactProvider } from '@/lib/contactContext'
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const projects = await getProject()
